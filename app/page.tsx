@@ -245,7 +245,7 @@ export default function Home() {
           ref={delText.ref}
           className={cls("reveal-up", delText.inView && "is-visible")}
           color={'white'} marginBottom={10} fontSize={12}
-        >encontre qualque endereco em angola</Text>
+        >encontre qualquer endereco em angola</Text>
         <Box
           ref={delImage.ref}
           className={cls("reveal-scale", delImage.inView && "is-visible")}
