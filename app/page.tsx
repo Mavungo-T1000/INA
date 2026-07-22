@@ -245,7 +245,7 @@ export default function Home() {
           ref={delText.ref}
           className={cls("reveal-up", delText.inView && "is-visible")}
           color={'white'} marginBottom={10} fontSize={12}
-        >Encontre qualquer enderecos de provincias angolanas  </Text>
+        >Encontre qualquer enderecos de angola  </Text>
         <Box
           ref={delImage.ref}
           className={cls("reveal-scale", delImage.inView && "is-visible")}
