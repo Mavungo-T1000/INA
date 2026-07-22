@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   description: `ina API de geolocazacao focada na criacao de codigo postais, mapas actualizados, digital twins
    para paises em desenvolvimento. inapi, ina api `,
    verification:{
-    google:"vxEvyqZ62CDJMrff__BCnRNvQ16iVT8JKjgGzA0x8R4"
+    google:"Y8yB40yZL3sUeUrgNnRRAGPVm2JynhLb4Z3lrgyXSlI"
    },
   openGraph:{
     images:["https://njinga-worker.njinga.workers.dev/inacard1.jpg"],
