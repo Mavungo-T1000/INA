@@ -17,14 +17,14 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "INAPI - API de Geolocalizacao angolana",
-  description: `API de geolocazacao focada na criacao de codigo postais, mapas actualizados, digital twins
-   para paises em desenvolvimento `,
+  description: `ina API de geolocazacao focada na criacao de codigo postais, mapas actualizados, digital twins
+   para paises em desenvolvimento. inapi, ina api `,
    verification:{
     google:"vxEvyqZ62CDJMrff__BCnRNvQ16iVT8JKjgGzA0x8R4"
    },
   openGraph:{
     images:["https://njinga-worker.njinga.workers.dev/inacard1.jpg"],
-    title:"INAPI - API de Geolocalizacao angolana",
+    title:"inapi - API de Geolocalizacao angolana",
     description: `API de geolocazacao focada na criacao de codigo postais, mapas actualizados, digital twins
    para paises em desenvolvimento `,
   },
