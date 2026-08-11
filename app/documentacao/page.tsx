@@ -95,11 +95,10 @@ export default function DocumentacaoPage() {
               Documentação
             </Badge>
             <Heading as="h1" size="xl">
-              Guia da Inta Business
+              Guia da INA
             </Heading>
             <Text color="gray.600" maxW="2xl">
-              Tudo o que precisa de saber para comprar, vender e integrar a
-              sua loja na plataforma.
+              Tudo o que precisa de saber para localizar-se em angola
             </Text>
           </VStack>
         </Container>
@@ -114,10 +113,9 @@ export default function DocumentacaoPage() {
           <Box flex="1" minW="0">
             <Section id="primeiros-passos" title="Primeiros passos">
               <Text color="gray.700" lineHeight="1.8">
-                Para começar a usar a Inta Business, crie uma conta com o seu
-                e-mail ou número de telefone. Depois de confirmar a conta,
-                pode escolher se quer comprar, vender, ou ambos — a mesma
-                conta serve para os dois casos.
+                Para começar a usar a INA, crie uma conta com o seu
+                e-mail. Depois de confirmar a conta,
+                pode comecar a verificar os nossos codigos postais
               </Text>
               
             </Section>
@@ -126,14 +124,10 @@ export default function DocumentacaoPage() {
 
             <Section id="compradores" title="Para compradores">
               <Text color="gray.700" lineHeight="1.8">
-                Pode pesquisar produtos por categoria, loja ou província.
-                Cada anúncio mostra o preço em Kwanzas, o estado do produto e
-                as avaliações da loja, para que decida com confiança antes de
-                finalizar a compra.
+                Pode pesquisar provincias, bairros, distritos com a nossa api
               </Text>
               <Text color="gray.700" lineHeight="1.8">
-                Após confirmar um pedido, pode acompanhar o estado da entrega
-                diretamente na secção “Os meus pedidos” do seu perfil.
+                Após realizar a pesquisa tambem pode 
               </Text>
             </Section>
 
