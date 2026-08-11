@@ -30,7 +30,9 @@ export default function AuthProvider({children}:{children:React.ReactNode}){
     const [isAuthenticated, setAuthenticated] = useState(false)
     const [user, setUser] = useState<User | null>(null)
     const router = useRouter()
-    
+    useEffect(()=>{
+
+    }, [])
     return(
         <AuthContext.Provider value={{isAuthenticated , setAuthenticated , user , setUser}}>
             {children}

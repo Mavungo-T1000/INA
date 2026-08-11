@@ -17,6 +17,12 @@ export default function CriarConta() {
         setLoading(true)
         if(!name || !password || !email){
             setLoading(false)
+             toaster.create({
+                title:"erro de envio",
+                description:"credenciais nao existem",
+                type:"error",
+                duration:5000
+            })
             return
         }
         try {

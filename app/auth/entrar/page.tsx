@@ -14,12 +14,13 @@ export default function Entrar() {
         async function enviar(){
             setLoading(true)
             if(!password || !email){
-                setLoading(false)
                 toaster.create({
                     title:"credenciais nao existem",
                     description:"Porfavor adicione credenciais",
-                    duration:5000
+                    duration:5000,
+                    type:"error"
                 })
+                 setLoading(false)
                 return
             }
             try {
@@ -35,8 +36,10 @@ export default function Entrar() {
                     toaster.create({
                         title:"Erro de envio",
                         description: d?.message,
+                        type:"error",
                         duration:5000
                     })
+                     setLoading(false)
                     return
                 }
                 
@@ -67,7 +70,7 @@ export default function Entrar() {
                 <Text color={'gray'} fontWeight={500} fontSize={12}>Senha</Text>
                 <Input onChange={(e)=>{setPassword(e.target.value)}} color={'black'} background={'#f6f6f6'} borderRadius={20} outline={'none'} fontSize={12} placeholder='Digite sua Senha'/> 
             </Box>
-        <Button loading={loading} onClick={enviar} width={'100%'} background={'blue'}>Criar conta</Button>  
+        <Button loading={loading} onClick={enviar} width={'100%'} background={'blue'}>Entrar </Button>  
         <HStack gap={2} alignItems={'center'} marginTop={2}>
            <Text fontSize={12} >Ainda nao tem conta?</Text> 
            <Link href={'/auth'} ><Text color={'blue'} fontSize={12}>clique aqui</Text></Link>
