@@ -31,11 +31,10 @@ export default function Entrar() {
                     },
                     body:JSON.stringify({email , password})
                 })
-                const d = await user.json()
                 if(!user.ok){
                     toaster.create({
                         title:"Erro de envio",
-                        description: d?.message,
+                        description: user.status,
                         type:"error",
                         duration:5000
                     })

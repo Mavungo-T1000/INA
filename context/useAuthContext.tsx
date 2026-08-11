@@ -31,7 +31,11 @@ export default function AuthProvider({children}:{children:React.ReactNode}){
     const [user, setUser] = useState<User | null>(null)
     const router = useRouter()
     useEffect(()=>{
-
+        async function entrar(){
+           const criar_conta = await fetch('https://ina.up.railway.app/Finder/api/usuarios/me') 
+           const data = await criar_conta.json()
+        }
+        entrar()
     }, [])
     return(
         <AuthContext.Provider value={{isAuthenticated , setAuthenticated , user , setUser}}>
