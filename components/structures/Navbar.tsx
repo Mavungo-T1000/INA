@@ -7,10 +7,11 @@ import React from 'react'
 import Menu from "../../public/icons/menus.svg"
 import {useRouter}  from "nextjs-toploader/app"
 import DrawerCustom from './Drawer'
+import { useAuth } from '@/context/useAuthContext'
 
 export default function Navbar() {
     const router = useRouter()
-    const user = true
+    const {isAuthenticated, user}:any  = useAuth()
   return (
     <HStack padding={10}  alignItems={'center'} borderBottomWidth={1}>
         <Box className='mobile-logo'  marginLeft={4} onClick={()=>{router.push('/')}} gap={3} cursor={'pointer'} alignItems={'center'} display={'flex'}>
@@ -21,7 +22,7 @@ export default function Navbar() {
             </VStack>
             
         </Box>
-        <HStack className='desktop' gap={4} flex={1} display={user ? "none" : "flex"} marginTop={4} alignItems={'center'} justifyContent={'center'}>
+        <HStack className='desktop' gap={4} flex={1} display={isAuthenticated ? "none" : "flex"} marginTop={4} alignItems={'center'} justifyContent={'center'}>
             <Link href={'#'}><Text className='item-menu'>Pagina Inicial</Text></Link>
         <Link href={'/servicos'}><HStack gap={1} alignItems={'center'}>
             <Text className='item-menu'>Sercicos</Text>
@@ -38,10 +39,10 @@ export default function Navbar() {
            /> 
         </Box>
         
-        <Button  display={user ? "none" : "block"}  className='desktop' onClick={()=>{router.push('/auth')}}  marginLeft={4} background={'blue'} borderRadius={50}>
+        <Button    className='desktop'  display={isAuthenticated ? "none" : "block"} onClick={()=>{router.push('/auth')}}  marginLeft={4} background={'blue'} borderRadius={50}>
             Criar Conta
         </Button>
-        <Avatar.Root display={!user ? "none" : "flex"}>
+        <Avatar.Root display={!isAuthenticated ? "none" : "flex"}>
             <Avatar.Fallback name='name'/>
 
         </Avatar.Root>

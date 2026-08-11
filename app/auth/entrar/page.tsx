@@ -1,12 +1,54 @@
 "use client"
 import { Box, Button, Heading, HStack, Input, Text, VStack } from '@chakra-ui/react'
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from "../../../public/icons/coollogo.svg"
 import {useRouter}  from "nextjs-toploader/app"
 import Link from 'next/link'
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
+import { auth } from '@/config/firebase'
+import { toaster } from '@/components/ui/toaster'
 
 export default function Entrar() {
     const router = useRouter()
+    const [password, setPassword] = useState("")
+    const [email, setEmail] = useState("")
+      const [loading, setLoading] = useState(false)
+        async function enviar(){
+            setLoading(true)
+            if(!password || !email){
+                setLoading(false)
+                toaster.create({
+                    title:"credenciais nao existem",
+                    description:"Porfavor adicione credenciais",
+                    duration:5000
+                })
+                return
+            }
+            try {
+                const user = await fetch('https://ina.up.railway.app/Finder/api/usuarios/login', {
+                    method:"POST", 
+                    headers:{
+                        "Content-Type":"application/json",
+                    },
+                    body:JSON.stringify({email , password})
+                })
+                const d = await user.json()
+                if(!user.ok){
+                    toaster.create({
+                        title:"Erro de envio",
+                        description: d?.message,
+                        duration:5000
+                    })
+                    return
+                }
+                
+                setLoading(false)
+            } catch (error) {
+                setLoading(false)
+                console.log(error)
+            }
+            
+        }
   return (
     <VStack padding={10} width={'100%'} background={'#f6f6f6'}>
         <VStack gap={4} padding={10} background={'white'} borderRadius={20} width={'100%'} maxWidth={400}>
@@ -21,13 +63,13 @@ export default function Entrar() {
             <Text fontSize={12} marginBottom={2}>Comece agora sua conta na INAPI preenchedo abaixo</Text>
             <Box width={'100%'}>
                 <Text color={'gray'} fontWeight={500} fontSize={12}>Email</Text>
-                <Input color={'black'} background={'#f6f6f6'} borderRadius={20} outline={'none'} fontSize={12} placeholder='Digite seu email'/> 
+                <Input onChange={(e)=>{setEmail(e.target.value)}} color={'black'} background={'#f6f6f6'} borderRadius={20} outline={'none'} fontSize={12} placeholder='Digite seu email'/> 
             </Box>
             <Box width={'100%'}>
                 <Text color={'gray'} fontWeight={500} fontSize={12}>Senha</Text>
-                <Input color={'black'} background={'#f6f6f6'} borderRadius={20} outline={'none'} fontSize={12} placeholder='Digite sua Senha'/> 
+                <Input onChange={(e)=>{setPassword(e.target.value)}} color={'black'} background={'#f6f6f6'} borderRadius={20} outline={'none'} fontSize={12} placeholder='Digite sua Senha'/> 
             </Box>
-        <Button width={'100%'} background={'blue'}>Criar conta</Button>  
+        <Button loading={loading} onClick={enviar} width={'100%'} background={'blue'}>Criar conta</Button>  
         <HStack gap={2} alignItems={'center'} marginTop={2}>
            <Text fontSize={12} >Ainda nao tem conta?</Text> 
            <Link href={'/auth'} ><Text color={'blue'} fontSize={12}>clique aqui</Text></Link>

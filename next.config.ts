@@ -38,14 +38,7 @@ const nextConfig: NextConfig = {
   images:{
     remotePatterns: [{ protocol:"https", hostname:"images.pexels.com"}, { protocol:"https", hostname:"njinga-worker.njinga.workers.dev"}]
   },
-  async rewrites() {
-      return [
-         {
-          source:"/Finder/api/:path*",
-          destination:"https://ina.up.railway.app/Finder/api/:path*"
-         }
-      ]
-  },
+ 
 };
 
 export default nextConfig;

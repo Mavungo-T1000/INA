@@ -5,6 +5,7 @@ import { Provider } from "@/components/ui/provider";
 import Navbar from "@/components/structures/Navbar";
 import Footer from "@/components/structures/Footer";
 import NextTopLoader from "nextjs-toploader"
+import AuthProvider from "@/context/useAuthContext";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -48,10 +49,13 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
       <Provider>
-        <NextTopLoader color="blue"/>
+        <AuthProvider>
+         <NextTopLoader color="blue"/>
         <Navbar/>
         {children}
-        <Footer/>
+        <Footer/> 
+        </AuthProvider>
+        
       </Provider>
       </body>
     </html>

@@ -4,16 +4,64 @@ import React, { useState } from 'react'
 import Logo from "../../public/icons/coollogo.svg"
 import {useRouter}  from "nextjs-toploader/app"
 import Link from 'next/link'
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
+import { auth, db } from '@/config/firebase'
+import { doc, setDoc } from 'firebase/firestore'
+import { toaster, Toaster } from '@/components/ui/toaster'
 
 export default function CriarConta() {
     const router = useRouter()
     const [name, setName] = useState("")
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
+    const [loading, setLoading] = useState(false)
 
     async function enviar(){
+        setLoading(true)
         if(!name || !password || !email){
+            setLoading(false)
             return
+        }
+        try {
+            const fetching = await fetch("https://ina.up.railway.app/Finder/api/usuarios/register", {
+                method:"POST",
+                headers:{
+                    "Content-Type" : "application/json"
+                },
+                body:JSON.stringify({username:name , email:email, password})
+            })
+            if(fetching.ok){
+                const data = await fetching.json()
+                const credentials = await createUserWithEmailAndPassword(auth, email, password)
+                const docref = doc(db, "profile", credentials.user.uid);
+                await setDoc(docref, {
+                    api_key: data.data.api_key,
+                    photo:null,
+                    email,
+                    name
+                })
+                toaster.create({
+                title:"conta criada com sucesso",
+                type:"success",
+                duration:5000
+            })
+                 setLoading(false)
+                return 
+            }
+            toaster.create({
+                title:"erro",
+                type:"error",
+                duration:5000
+            })
+             setLoading(false)
+        } catch (error:any) {
+            toaster.create({
+                title:error?.message,
+                type:"error",
+                duration:5000
+            })
+             setLoading(false)
+            console.log(error)
         }
         
     }
@@ -41,14 +89,14 @@ export default function CriarConta() {
                 <Text color={'gray'} fontWeight={500} fontSize={12}>Senha</Text>
                 <Input onChange={(e)=>{setPassword(e.target.value)}} color={'black'} background={'#f6f6f6'} borderRadius={20} outline={'none'} fontSize={12} placeholder='Digite sua Senha'/> 
             </Box>
-        <Button width={'100%'} background={'blue'}>Criar conta</Button>  
+        <Button loading={loading} onClick={enviar} width={'100%'} background={'blue'}>Criar conta</Button>  
         <HStack gap={2} alignItems={'center'} marginTop={2}>
            <Text fontSize={12} >Ja tem conta?</Text> 
            <Link href={'/auth/entrar'} ><Text color={'blue'} fontSize={12}>clique aqui</Text></Link>
         </HStack>
         
         </VStack>
-        
+        <Toaster/>
     </VStack>
   )
 }
