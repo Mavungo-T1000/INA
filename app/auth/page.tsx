@@ -4,9 +4,6 @@ import React, { useState } from 'react'
 import Logo from "../../public/icons/coollogo.svg"
 import {useRouter}  from "nextjs-toploader/app"
 import Link from 'next/link'
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
-import { auth, db } from '@/config/firebase'
-import { doc, setDoc } from 'firebase/firestore'
 import { toaster, Toaster } from '@/components/ui/toaster'
 
 export default function CriarConta() {
@@ -30,29 +27,7 @@ export default function CriarConta() {
                 },
                 body:JSON.stringify({username:name , email:email, password})
             })
-            if(fetching.ok){
-                const data = await fetching.json()
-                const credentials = await createUserWithEmailAndPassword(auth, email, password)
-                const docref = doc(db, "profile", credentials.user.uid);
-                await setDoc(docref, {
-                    api_key: data.data.api_key,
-                    photo:null,
-                    email,
-                    name
-                })
-                toaster.create({
-                title:"conta criada com sucesso",
-                type:"success",
-                duration:5000
-            })
-                 setLoading(false)
-                return 
-            }
-            toaster.create({
-                title:"erro",
-                type:"error",
-                duration:5000
-            })
+            
              setLoading(false)
         } catch (error:any) {
             toaster.create({

@@ -4,8 +4,6 @@ import React, { useState } from 'react'
 import Logo from "../../../public/icons/coollogo.svg"
 import {useRouter}  from "nextjs-toploader/app"
 import Link from 'next/link'
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth'
-import { auth } from '@/config/firebase'
 import { toaster } from '@/components/ui/toaster'
 
 export default function Entrar() {
