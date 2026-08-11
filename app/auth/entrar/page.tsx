@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import Logo from "../../../public/icons/coollogo.svg"
 import {useRouter}  from "nextjs-toploader/app"
 import Link from 'next/link'
-import { toaster } from '@/components/ui/toaster'
+import { Toaster, toaster } from '@/components/ui/toaster'
 
 export default function Entrar() {
     const router = useRouter()
@@ -77,7 +77,7 @@ export default function Entrar() {
         </HStack>
         
         </VStack>
-        
+        <Toaster/>
     </VStack>
   )
 }
