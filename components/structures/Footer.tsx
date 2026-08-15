@@ -1,11 +1,14 @@
+"use client"
 import { Button, Heading, HStack, Text, VStack } from '@chakra-ui/react'
 import Logo from "../../public/icons/coollogo.svg"
 import React from 'react'
 import Link from 'next/link'
+import { usePathname } from 'next/navigation'
 
 export default function Footer() {
+      const pathname = usePathname()
   return (
-    <VStack padding={10} background={'#161616'} >
+    <VStack display={pathname.includes('home') ? 'none' : 'flex'} padding={10} background={'#161616'} >
         <HStack display={'grid'}  gridTemplateColumns={'repeat(auto-fit, minmax(min(300px, 100%), 1fr))'} alignItems={'flex-start'} gap={10} width={'100%'}>
             <VStack alignItems={'flex-start'}>
                 <HStack alignItems={'center'} gap={0}>

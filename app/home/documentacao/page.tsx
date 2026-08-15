@@ -88,7 +88,7 @@ export default function DocumentacaoPage() {
 
   }
   return (
-    <Box bg="white" >
+    <Box  bg="white" overflowY={'auto'} height={'100%'}>
       <Box bg="gray.50" borderBottom="1px solid" borderColor="gray.200">
         <Container maxW="6xl" py={12}>
           <VStack align="start" gap={3}>

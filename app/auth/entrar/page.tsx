@@ -5,11 +5,13 @@ import Logo from "../../../public/icons/coollogo.svg"
 import {useRouter}  from "nextjs-toploader/app"
 import Link from 'next/link'
 import { Toaster, toaster } from '@/components/ui/toaster'
+import { useAuth } from '@/context/useAuthContext'
 
 export default function Entrar() {
     const router = useRouter()
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
+    const {setUser , setAuthenticated}:any = useAuth()
       const [loading, setLoading] = useState(false)
         async function enviar(){
             setLoading(true)
@@ -24,10 +26,10 @@ export default function Entrar() {
                 return
             }
             try {
-                const user = await fetch('https://ina.up.railway.app/Finder/api/usuarios/login', {
+                const user = await fetch('http://localhost:9000/Finder/api/usuarios/login', {
                     method:"POST", 
                     headers:{
-                        "Content-Type":"application/json",
+                        "Content-Type":"application/json",  
                     },
                     body:JSON.stringify({email , password})
                 })
@@ -39,10 +41,23 @@ export default function Entrar() {
                         duration:5000
                     })
                      setLoading(false)
+
                     return
                 }
+                const data = await user.json()
                 
+                localStorage.setItem('access_token', data?.token)
+                localStorage.setItem('email', data?.userdata.email)
+                toaster.create({
+                        title:"Bem-vindo",
+                        description: data?.message,
+                        type:"success",
+                        duration:5000
+                    })
+                setUser({name:data.userdata.nome , email:data.userdata.email , token: data.token})
+                setAuthenticated(true)
                 setLoading(false)
+                router.push('/home')
             } catch (error) {
                 setLoading(false)
                 console.log(error)

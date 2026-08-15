@@ -104,7 +104,7 @@ export default function TestarApiPage() {
               Testar rotas da API
             </Heading>
             <Text color="gray.600">
-              Envie pedidos reais à API da Inta Business e veja a resposta.
+              Envie pedidos de busca de dados na nossa API
             </Text>
           </VStack>
 

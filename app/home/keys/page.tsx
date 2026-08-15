@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Box,
   Container,
@@ -17,25 +17,60 @@ import {
 } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { toaster } from "@/components/ui/toaster";
+import { useAuth } from "@/context/useAuthContext";
 
 // Placeholder generator — replace with a real call to
 // POST /api/chaves in your backend.
-function gerarChaveFalsa() {
-  const bloco = () =>
-    Math.random().toString(36).slice(2, 10).padEnd(8, "0");
-  return `inta_live_${bloco()}${bloco()}`;
+async function gerarChaveFalsa(token:string, email:string) {
+  const fetching = await fetch("http://localhost:9000/Finder/api/usuarios/createApiKey", {
+    method:"POST",
+    headers:{
+        "Content-Type" : "application/json"
+    },
+    body:JSON.stringify({token , email})
+  })
+  if(!fetching.ok) {
+    return false
+  }
+  const chave = await fetching.json()
+  return chave.api_key
 }
-
+async function getChaves(token:string, email:string) {
+  const fetching = await fetch("http://localhost:9000/Finder/api/usuarios/apikey", {
+    method:"POST",
+    headers:{
+        "Content-Type" : "application/json"
+    },
+    body:JSON.stringify({token , email})
+  })
+  if(!fetching.ok) {
+    return false
+  }
+  const chave = await fetching.json()
+  return chave.api_key
+}
+async function deletarChave(token:string, email:string) {
+  const fetching = await fetch("http://localhost:9000/Finder/api/usuarios/deleteApiKey", {
+    method:"POST",
+    headers:{
+        "Content-Type" : "application/json"
+    },
+    body:JSON.stringify({token , email})
+  })
+  if(!fetching.ok) {
+    return false
+  }
+  const chave = await fetching.json()
+  return chave.success
+}
 function mascarar(chave: string) {
   return `${chave.slice(0, 12)}${"•".repeat(20)}${chave.slice(-4)}`;
 }
 
 export default function ChaveApiPage() {
-  const [apiKey, setApiKey] = useState<string | null>(
-    "inta_live_9f3ac72b0e21c8d4f6a1"
-  );
-  const [criadaEm] = useState("14 Jul 2026");
-  const [ultimoUso] = useState("Há 2 horas");
+  const [apiKey, setApiKey] = useState<string | null>(null);
+  const [criadaEm] = useState("");
+  const [ultimoUso] = useState("");
   const [revelada, setRevelada] = useState(false);
   const { copy, copied } = useClipboard();
 
@@ -43,11 +78,20 @@ export default function ChaveApiPage() {
     null
   );
   const cancelRef = useRef<HTMLButtonElement>(null);
-
-  function confirmarGerarNovaChave() {
+const {user}:any = useAuth()
+useEffect(()=>{
+    async function update(){
+      if(!user?.token || !user?.email) return
+      const chave = await getChaves(user.token , user.email)
+      setApiKey(chave)
+    }
+    update()
+}, [])
+ async function confirmarGerarNovaChave() {
     // Placeholder — replace with a real call to
     // POST /api/chaves/gerar in your backend.
-    const nova = gerarChaveFalsa();
+
+    const nova : any= await gerarChaveFalsa(user.token, user.email);
     setApiKey(nova);
     setRevelada(true);
     setDialogAberto(null);
@@ -58,9 +102,10 @@ export default function ChaveApiPage() {
     });
   }
 
-  function confirmarEliminarChave() {
+ async function confirmarEliminarChave() {
     // Placeholder — replace with a real call to
     // DELETE /api/chaves in your backend.
+    const deletar = await deletarChave(user.token , user.email)
     setApiKey(null);
     setDialogAberto(null);
     toaster.create({
@@ -75,10 +120,10 @@ export default function ChaveApiPage() {
         <VStack align="start" gap={6}>
           <VStack align="start" gap={1}>
             <Heading as="h1" size="lg">
-              Chave de API sdsd
+              Chave de API INAPI
             </Heading>
             <Text color="gray.600">
-              Use esta chave para autenticar pedidos à API da Inta Business.
+              Use esta chave para autenticar pedidos à API da INAPI.
             </Text>
           </VStack>
 
@@ -136,7 +181,7 @@ export default function ChaveApiPage() {
                   variant="outline"
                   colorScheme="red"
                   size="sm"
-                  onClick={() => setDialogAberto("gerar")}
+                  onClick={() => confirmarGerarNovaChave()}
                 >
                   Gerar nova chave
                 </Button>
@@ -144,7 +189,7 @@ export default function ChaveApiPage() {
                   variant="ghost"
                   colorScheme="red"
                   size="sm"
-                  onClick={() => setDialogAberto("eliminar")}
+                  onClick={() => confirmarEliminarChave()}
                 >
                   Eliminar chave
                 </Button>
@@ -165,7 +210,7 @@ export default function ChaveApiPage() {
               <Text color="gray.600">Ainda não tem nenhuma chave de API.</Text>
               <Button
                 colorScheme="red"
-                onClick={() => setDialogAberto("gerar")}
+                onClick={() =>confirmarGerarNovaChave()}
               >
                 Gerar chave
               </Button>

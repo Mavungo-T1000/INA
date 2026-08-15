@@ -1,3 +1,5 @@
+import SideBar from '@/components/structures/SideBar';
+import { HStack, VStack } from '@chakra-ui/react';
 import React from 'react'
 
 export default function HomeLayout({
@@ -7,8 +9,9 @@ export default function HomeLayout({
 }>) {
   
   return (
-    <div>
+    <HStack className='no-scroll' overflow={'hidden'} padding={2} height={'100vh'} alignItems={'flex-start'}>
+      <SideBar/>
       {children}
-    </div>
+    </HStack>
   )
 }

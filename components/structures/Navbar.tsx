@@ -8,12 +8,14 @@ import Menu from "../../public/icons/menus.svg"
 import {useRouter}  from "nextjs-toploader/app"
 import DrawerCustom from './Drawer'
 import { useAuth } from '@/context/useAuthContext'
+import { usePathname } from 'next/navigation'
 
 export default function Navbar() {
     const router = useRouter()
     const {isAuthenticated, user}:any  = useAuth()
+    const pathname = usePathname()
   return (
-    <HStack padding={10}  alignItems={'center'} borderBottomWidth={1}>
+    <HStack display={pathname.includes('home') ? 'none' : 'flex'} padding={10}  alignItems={'center'} borderBottomWidth={1}>
         <Box className='mobile-logo'  marginLeft={4} onClick={()=>{router.push('/')}} gap={3} cursor={'pointer'} alignItems={'center'} display={'flex'}>
             <Logo style={{scale:2}}  />
             <VStack alignItems={'flex-start'} gap={0}>

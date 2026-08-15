@@ -5,6 +5,7 @@ import Logo from "../../public/icons/coollogo.svg"
 import {useRouter}  from "nextjs-toploader/app"
 import Link from 'next/link'
 import { toaster, Toaster } from '@/components/ui/toaster'
+import { useAuth } from '@/context/useAuthContext'
 
 export default function CriarConta() {
     const router = useRouter()
@@ -12,7 +13,7 @@ export default function CriarConta() {
     const [password, setPassword] = useState("")
     const [email, setEmail] = useState("")
     const [loading, setLoading] = useState(false)
-
+    const {setUser, setAuthenticated}:any = useAuth()
     async function enviar(){
         setLoading(true)
         if(!name || !password || !email){
@@ -26,15 +27,34 @@ export default function CriarConta() {
             return
         }
         try {
-            const fetching = await fetch("https://ina.up.railway.app/Finder/api/usuarios/register", {
+            const fetching = await fetch("http://localhost:9000/Finder/api/usuarios/register", {
                 method:"POST",
                 headers:{
                     "Content-Type" : "application/json"
                 },
                 body:JSON.stringify({username:name , email:email, password})
             })
-            
+             if(!fetching.ok){
+                const data = await fetching.json()
+                toaster.create({
+                title:data?.message,
+                type:"error",
+                duration:5000
+            })
+            return
+             }
+             const data = await fetching.json()
+             localStorage.setItem('access_token', data.token)
+             localStorage.setItem('email', data.userdata.email)
+             setUser({username:data.userdata.nome , email:data.userdata.email , token:data?.token})
+             toaster.create({
+                title:data?.message,
+                type:"success",
+                duration:5000
+            })
+             setAuthenticated(true)
              setLoading(false)
+             router.push('/home')
         } catch (error:any) {
             toaster.create({
                 title:error?.message,

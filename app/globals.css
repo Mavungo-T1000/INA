@@ -124,3 +124,7 @@ div .imageZindex{
     display: flex;
   }
 }
+
+.no-scroll::-webkit-scrollbar{
+  display: none;
+}

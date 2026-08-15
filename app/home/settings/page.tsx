@@ -14,6 +14,7 @@ import {
   Badge,
 } from "@chakra-ui/react";
 import { toaster } from "@/components/ui/toaster";
+import { useAuth } from "@/context/useAuthContext";
 
 const provincias = [
   "Luanda",
@@ -29,11 +30,11 @@ export default function DefinicoesPage() {
 
   // Placeholder initial values — replace with data loaded from
   // GET /api/utilizador/perfil in your backend.
-  const [nome, setNome] = useState("Isidoro Neto");
-  const [telefone, setTelefone] = useState("+244 923 000 000");
+  const [nome, setNome] = useState("");
+  const [telefone, setTelefone] = useState("");
   const [provincia, setProvincia] = useState("Luanda");
   const email = "isidoro@example.com";
-
+  const {user}:any = useAuth()
   const [aGuardar, setAGuardar] = useState(false);
 
   async function guardarAlteracoes() {
@@ -78,59 +79,16 @@ export default function DefinicoesPage() {
 
             <VStack>
               <Heading fontSize="sm">Nome completo</Heading>
-              <Input value={nome} onChange={(e) => setNome(e.target.value)} />
+              <Text fontSize={12}> {user?.name} </Text>
             </VStack>
 
             <VStack>
-              <Heading fontSize="sm">Telefone</Heading>
-              <Input
-                value={telefone}
-                onChange={(e) => setTelefone(e.target.value)}
-              />
+              <Heading fontSize="sm">email</Heading>
+              <Text fontSize={12}> {user?.email} </Text>
             </VStack>
 
-            <VStack>
-              <Heading fontSize="sm">Província</Heading>
-              
-            </VStack>
-
-            <Button
-              colorScheme="red"
-              onClick={guardarAlteracoes}
-              loadingText="A guardar"
-            >
-              Guardar alterações
-            </Button>
           </VStack>
 
-          <VStack
-            align="start"
-            gap={4}
-            width="full"
-            borderWidth="1px"
-            borderColor="gray.200"
-            borderRadius="lg"
-            p={6}
-          >
-            <Heading as="h2" size="sm">
-              E-mail
-            </Heading>
-
-            <VStack>
-              <HStack gap={2} mb={1}>
-                <Heading fontSize="sm" mb={0}>
-                  Endereço de e-mail
-                </Heading>
-                <Badge colorScheme="green" fontSize="xs">
-                  Verificado
-                </Badge>
-              </HStack>
-              <Input value={email}  bg="gray.50" color="gray.600" />
-              <Text>
-                Para alterar o e-mail associado à conta, contacte o suporte.
-              </Text>
-            </VStack>
-          </VStack>
         </VStack>
       </Container>
     </Box>
