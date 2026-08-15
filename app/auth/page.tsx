@@ -27,7 +27,7 @@ export default function CriarConta() {
             return
         }
         try {
-            const fetching = await fetch("http://localhost:9000/Finder/api/usuarios/register", {
+            const fetching = await fetch("https://ina.up.railway.app/Finder/api/usuarios/register", {
                 method:"POST",
                 headers:{
                     "Content-Type" : "application/json"

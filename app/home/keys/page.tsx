@@ -22,7 +22,7 @@ import { useAuth } from "@/context/useAuthContext";
 // Placeholder generator — replace with a real call to
 // POST /api/chaves in your backend.
 async function gerarChaveFalsa(token:string, email:string) {
-  const fetching = await fetch("http://localhost:9000/Finder/api/usuarios/createApiKey", {
+  const fetching = await fetch("https://ina.up.railway.app/Finder/api/usuarios/createApiKey", {
     method:"POST",
     headers:{
         "Content-Type" : "application/json"
@@ -36,7 +36,7 @@ async function gerarChaveFalsa(token:string, email:string) {
   return chave.api_key
 }
 async function getChaves(token:string, email:string) {
-  const fetching = await fetch("http://localhost:9000/Finder/api/usuarios/apikey", {
+  const fetching = await fetch("https://ina.up.railway.app/Finder/api/usuarios/apikey", {
     method:"POST",
     headers:{
         "Content-Type" : "application/json"
@@ -50,7 +50,7 @@ async function getChaves(token:string, email:string) {
   return chave.api_key
 }
 async function deletarChave(token:string, email:string) {
-  const fetching = await fetch("http://localhost:9000/Finder/api/usuarios/deleteApiKey", {
+  const fetching = await fetch("https://ina.up.railway.app/Finder/api/usuarios/deleteApiKey", {
     method:"POST",
     headers:{
         "Content-Type" : "application/json"

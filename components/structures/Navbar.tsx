@@ -16,23 +16,23 @@ export default function Navbar() {
     const pathname = usePathname()
   return (
     <HStack display={pathname.includes('home') ? 'none' : 'flex'} padding={10}  alignItems={'center'} borderBottomWidth={1}>
-        <Box className='mobile-logo'  marginLeft={4} onClick={()=>{router.push('/')}} gap={3} cursor={'pointer'} alignItems={'center'} display={'flex'}>
-            <Logo style={{scale:2}}  />
-            <VStack alignItems={'flex-start'} gap={0}>
-               <Heading lineHeight={1} marginTop={4} fontSize={28}>INAPI</Heading> 
-               <Text color={'gray'} fontSize={7}>API de geolocalizacao</Text>
-            </VStack>
-            
+        <Box className='mobile-logo'  marginLeft={4}  gap={3} cursor={'pointer'} alignItems={'center'} display={'flex'}>
+                    <Logo style={{scale:2}}  />
+                    <VStack alignItems={'flex-start'} gap={0}>
+                       <Heading lineHeight={1} marginTop={4} fontSize={28}>INAPI</Heading> 
+                       <Text color={'gray'} fontSize={7}>API de geolocalização</Text>
+                    </VStack>
+                    
         </Box>
         <HStack className='desktop' gap={4} flex={1} display={isAuthenticated ? "none" : "flex"} marginTop={4} alignItems={'center'} justifyContent={'center'}>
-            <Link href={'#'}><Text className='item-menu'>Pagina Inicial</Text></Link>
+            <Link href={'#'}><Text className='item-menu'>Página Inicial</Text></Link>
         <Link href={'/servicos'}><HStack gap={1} alignItems={'center'}>
-            <Text className='item-menu'>Sercicos</Text>
+            <Text className='item-menu'>Serviços</Text>
             <ArrowDown height="20px" width="20px"/>
             </HStack>
             </Link>
-        <Link href={'/sobrenos'}><Text className='item-menu'>Sobre nos</Text></Link>
-        <Link href={'/documentacao'}><Text className='item-menu'>Documentacao</Text></Link>
+        <Link href={'/sobrenos'}><Text className='item-menu'>Sobre nós</Text></Link>
+        <Link href={'/documentacao'}><Text className='item-menu'>Documentação</Text></Link>
         </HStack>
 <HStack gap={4} alignItems={'center'}>
         <Box  className='mobileOnly' >

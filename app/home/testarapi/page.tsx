@@ -16,14 +16,15 @@ import {
   Badge,
 } from "@chakra-ui/react";
 
-const BASE_URL = "https://api.inta-business.com/v1";
+const BASE_URL = "https://ina.up.railway.app/Finder/api";
 
 const rotasSugeridas = [
-  "/produtos",
-  "/produtos/{id}",
-  "/lojas",
-  "/pedidos",
-  "/pedidos/{id}",
+  "/provincia/pesquisa",
+  "/provincia/id/",
+  "/ruas/id/",
+  "/distritos/id/",
+  "/comunas/id/",
+  "/municipios/id/",
 ];
 
 type Resposta = {
@@ -34,9 +35,9 @@ type Resposta = {
 
 export default function TestarApiPage() {
   const [metodo, setMetodo] = useState("GET");
-  const [rota, setRota] = useState("/produtos");
+  const [rota, setRota] = useState("/provincias");
   const [autorizacao, setAutorizacao] = useState(
-    "Bearer inta_live_9f3ac72b0e21c8d4f6a1"
+    "b32a1fe6c5cabd394ff60caefba3f271d37d9a8f77734d03ec15c530ea5c8a49"
   );
   const [corpo, setCorpo] = useState(
     '{\n  "nome": "Camisa de algodão",\n  "preco_aoa": 8500,\n  "quantidade": 20\n}'
@@ -57,7 +58,7 @@ export default function TestarApiPage() {
       const opcoes: RequestInit = {
         method: metodo,
         headers: {
-          Authorization: autorizacao,
+          "api_key" : autorizacao,
           "Content-Type": "application/json",
         },
       };
@@ -96,7 +97,7 @@ export default function TestarApiPage() {
   };
 
   return (
-    <Box bg="white" minH="100vh">
+    <Box bg="white" minH="100vh" overflowY={'auto'}>
       <Container maxW="4xl" py={10}>
         <VStack align="start" gap={6}>
           <VStack align="start" gap={1}>
@@ -190,6 +191,7 @@ export default function TestarApiPage() {
               colorScheme="red"
               onClick={enviarPedido}
               loadingText="A enviar"
+              background={'blue'}
             >
               Enviar pedido
             </Button>

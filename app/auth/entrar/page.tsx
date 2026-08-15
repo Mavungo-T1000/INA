@@ -26,7 +26,7 @@ export default function Entrar() {
                 return
             }
             try {
-                const user = await fetch('http://localhost:9000/Finder/api/usuarios/login', {
+                const user = await fetch('https://ina.up.railway.app/Finder/api/usuarios/login', {
                     method:"POST", 
                     headers:{
                         "Content-Type":"application/json",  

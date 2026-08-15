@@ -121,8 +121,7 @@ export default function DocumentacaoPage() {
             <Section id="primeiros-passos" title="Primeiros passos">
               <Text color="gray.700" lineHeight="1.8">
                 Para começar a usar a INA, crie uma conta com o seu
-                e-mail. Depois de confirmar a conta,
-                pode comecar a verificar os nossos codigos postais
+                e-mail.pode comecar a verificar os nossos codigos postais
               </Text>
               
             </Section>
@@ -134,7 +133,7 @@ export default function DocumentacaoPage() {
                 Pode pesquisar provincias, bairros, distritos com a nossa api
               </Text>
               <Text color="gray.700" lineHeight="1.8">
-                Após realizar a pesquisa tambem pode 
+                Após realizar a pesquisa por nome tambem pode ver o codigo postal
               </Text>
             </Section>
 
@@ -142,10 +141,8 @@ export default function DocumentacaoPage() {
 
             <Section id="lojistas" title="Para lojistas">
               <Text color="gray.700" lineHeight="1.8">
-                Abrir uma loja é gratuito. Depois de criar a conta, escolha
-                “Tornar-me lojista”, preencha os dados do seu negócio e
-                comece a publicar produtos com fotografias, preço e
-                quantidade em stock.
+                A INA facilita a entrega de artigos com maior eficiencia
+                garantindo localizacoes exactas adquiridas pela nossa equipe
               </Text>
               
             </Section>
@@ -154,9 +151,8 @@ export default function DocumentacaoPage() {
 
             <Section id="integracao" title="Integração via API">
               <Text color="gray.700" lineHeight="1.8">
-                Lojistas com um catálogo maior podem sincronizar produtos
-                automaticamente através da nossa API REST, em vez de os
-                publicar um a um.
+                Lojistas podem usar os nossos servicos para poder
+                fazer entregas nos quatro cantos do pais
               </Text>
               <Box
                 bg="gray.900"
@@ -172,19 +168,18 @@ export default function DocumentacaoPage() {
                   fontSize="sm"
                   whiteSpace="pre"
                 >
-{`curl -X POST https://api.inta-business.com/v1/produtos \\
-  -H "Authorization: Bearer SEU_TOKEN" \\
+{`curl -X POST https://ina.api.app.render// \\
+  -H "api_key: 784bn....20924023" \\
   -H "Content-Type: application/json" \\
   -d '{
-    "nome": "Camisa de algodão",
-    "preco_aoa": 8500,
-    "quantidade": 20
+    "id_rua: "1",
+    "nome": "25 de abril",
+    "code": 125007
   }'`}
                 </Code>
               </Box>
               <Text color="gray.600" fontSize="sm">
-                Pode gerar um token de acesso na secção “Definições da loja →
-                Chaves de API” do seu painel.
+                Pode gerar sua api key fazendo login no nosso web app
               </Text>
             </Section>
 
@@ -194,29 +189,30 @@ export default function DocumentacaoPage() {
               <VStack align="start" gap={5}>
                 <Box>
                   <Text fontWeight="semibold" color="gray.800">
-                    Quanto custa vender na Inta Business?
+                    Quanto custa o rpm da INA?
                   </Text>
                   <Text color="gray.600">
-                    Abrir e manter uma loja é gratuito. Aplicamos apenas uma
-                    pequena comissão sobre vendas concluídas.
+                    De momento a INA se encontra em fase de desenvolvimento,
+                    apos, a aquisicao de mais dados definiremos esses valores
                   </Text>
                 </Box>
                 <Box>
                   <Text fontWeight="semibold" color="gray.800">
-                    Em quanto tempo a minha loja fica visível?
+                    Como fazer login na INA
                   </Text>
                   <Text color="gray.600">
-                    Assim que preencher os dados da loja e publicar o
-                    primeiro produto, a loja fica visível de imediato.
+                    O login no nosso web app e totalmente gratuito e simples de se fazer,
+                    apenas dirija-se ao nosso web app em : https://ina-ten.vercel.app/ e 
+                    cliquar na opcao comecar agora
                   </Text>
                 </Box>
                 <Box>
                   <Text fontWeight="semibold" color="gray.800">
-                    Posso vender fora de Angola?
+                    A Ina esta a contractar?
                   </Text>
                   <Text color="gray.600">
-                    Por agora a Inta Business está focada exclusivamente no
-                    mercado angolano.
+                    Por agora a INTA ainda nao esta contratando, mais em breve poderemos,
+                    para mais informacoes contacte-nos em: 
                   </Text>
                 </Box>
               </VStack>

@@ -38,7 +38,7 @@ export default function AuthProvider({children}:{children:React.ReactNode}){
             if(!email || !token) {
                return router.push('/')
             }
-            const fetching = await fetch("http://localhost:9000/Finder/api/usuarios/me", {
+            const fetching = await fetch("https://ina.up.railway.app/Finder/api/usuarios/me", {
             method:"POST",
             headers:{
             'Content-Type':"application/json"

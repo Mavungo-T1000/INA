@@ -23,7 +23,7 @@ export default function SideBar() {
                     <Logo style={{scale:2}}  />
                     <VStack alignItems={'flex-start'} gap={0}>
                        <Heading lineHeight={1} marginTop={4} fontSize={28}>INAPI</Heading> 
-                       <Text color={'gray'} fontSize={7}>API de geolocalizacao</Text>
+                       <Text color={'gray'} fontSize={7}>API de geolocalização</Text>
                     </VStack>
                     
                 </Box>
@@ -38,11 +38,11 @@ export default function SideBar() {
         </HStack>
         <HStack background={activeMenu == 'doc' ? '#ececef' : "transparent"} onClick={()=>{router.push('/home/documentacao'), setActiveMenu('doc')}} cursor={'pointer'} _hover={{background:"#e6e6e6", borderRadius:10}} padding={4} width={'100%'}>
             <Icon.File color='gray' height={17} width={17}/>
-            <Text fontSize={12} color={'#222222'}>Documentacao</Text>
+            <Text fontSize={12} color={'#222222'}>Documentação</Text>
         </HStack>
         <HStack background={activeMenu == 'sett' ? '#ececef' : "transparent"} onClick={()=>{router.push('/home/settings'), setActiveMenu('sett')}} cursor={'pointer'} _hover={{background:"#e6e6e6", borderRadius:10}} padding={4} width={'100%'}>
             <Icon.Settings color='gray' height={17} width={17}/>
-            <Text fontSize={12} color={'#222222'}>Definicoes</Text>
+            <Text fontSize={12} color={'#222222'}>Definições</Text>
         </HStack>
          <HStack cursor={'pointer'} _hover={{background:"#e6e6e6", borderRadius:10}}  onClick={logout} padding={4} width={'100%'}>
             <Text fontSize={12} color={'red'}>Sair</Text>
